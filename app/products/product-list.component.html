@@ -1,0 +1,50 @@
+<div class="panel panel-primary">
+    <div class="panel panel-heading">
+        {{pageTitle}}
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="exampleInputEmail1"> Filter by product code : {{listFilter}}</label>
+                    <input type="text" class="form-control" [(ngModel)]="listFilter" placeholder="Filter by product code">
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="table-responsive">
+                <h3 *ngIf="myhead"> Data is coming soon</h3>
+                <table class="table" *ngIf='products'>
+                    <thead>
+                        <tr>
+                            <button class="btn btn-primary" (click)='toggleImage()'> 
+                                {{showImages?'Hide image':'Show Image'}}
+                            </button>
+                            <th>Product</th>
+                            <th>Code</th>
+                            <th>Available</th>
+                            <th>Price</th>
+                            <th>Star Rating</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let product of products|productFilter:listFilter'>
+                            <td>
+                                <img [src]='product.imageUrl' [style.width.px]='imageWidth' *ngIf="showImages">
+                            </td>
+                            <td>{{product.productName | uppercase}}</td>
+                            <td>{{product.productCode | uppercase}}</td>
+                            <td>{{product.releaseDate}}</td>
+                            <td>{{product.price|currency:'USD':true}}</td>
+                            <td>
+                                <edu-star [rating]="product.starRating"></edu-star>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

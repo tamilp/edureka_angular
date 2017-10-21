@@ -10,7 +10,11 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var app_component_1 = require("./app.component");
-var author_component_1 = require("./author.component");
+var product_list_component_1 = require("./products/product-list.component");
+var product_filter_pipe_1 = require("./products/product-filter.pipe");
+var star_component_1 = require("./shared/star.component");
+var order_list_component_1 = require("./orders/order-list.component");
+var order_filter_pipe_1 = require("./orders/order-filter.pipe");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -22,7 +26,11 @@ var AppModule = /** @class */ (function () {
             ],
             declarations: [
                 app_component_1.AppComponent,
-                author_component_1.AuthorComponent
+                star_component_1.StarComponent,
+                product_list_component_1.ProductListComponent,
+                product_filter_pipe_1.ProductFilterPipe,
+                order_list_component_1.OrderListComponent,
+                order_filter_pipe_1.orderFilterPipe
             ],
             bootstrap: [app_component_1.AppComponent]
         })

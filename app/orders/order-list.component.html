@@ -1,0 +1,81 @@
+<div class="panel panel-primary">
+    <div class="panel panel-heading">
+        {{orderTitle}}
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="exampleInputEmail1"> Filter by product : {{orderFilterBy}}</label>
+                    <input type="text" class="form-control" [(ngModel)]="orderFilterBy" placeholder="Filter by product">
+                </div>
+            </div>
+            <div class="col-md-4">
+                &nbsp;
+            </div>
+            <div class="col-md-4">
+                &nbsp; 
+            </div>
+            <div class="col-md-2">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm" (click)="orderList()">
+                        <span class="glyphicon glyphicon-th-list"></span>List
+                    </button>
+                    <button type="button" class="btn btn-default btn-sm" (click)="orderGrid()">
+                        <span class="glyphicon glyphicon-th"></span>Grid
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row" *ngIf="orderListView">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>Product Image</td>
+                            <td>OrderID</td>
+                            <td>Product</td>
+                            <td>Quantity</td>
+                            <td>Price</td>
+                            <td>Star Rating</td>
+                        </tr>
+                        <tr *ngFor="let order of orders | orderFilter: orderFilterBy">
+                            <td><img [src]="order.imageUrl" [style.width.px]="orderImageWidth" [style.height.px]="orderImageWidth" /></td>
+                            <td>{{order.orderID}}</td>
+                            <td>{{order.productName | uppercase}}</td>
+                            <td>{{order.quantity}}</td>
+                            <td>{{order.price | currency : "USD" : true}}</td>
+                            <td><edu-star [rating]="order.starRating"></edu-star></td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="row" *ngIf="orderGridView">
+            <div class="col-md-3" *ngFor="let order of orders | orderFilter: orderFilterBy">
+                <div class="thumbnail">
+                    <img [src]="order.imageUrl" [style.width.px]="orderImageWidthGrid" [style.height.px]="orderImageWidthGrid" />
+                    <div class="caption">
+                        <div class="row">
+                            <div class="col-md-12">OrderID : {{order.orderID}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">Product : {{order.productName | uppercase}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">Quantity : {{order.quantity}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">Price : {{order.price | currency : "USD" : true}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12"><edu-star [rating]="order.starRating"></edu-star></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
